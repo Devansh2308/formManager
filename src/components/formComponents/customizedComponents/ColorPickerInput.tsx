@@ -54,7 +54,6 @@ const useStyles = (color: string) => {
 
 
 const ColorPickerComponent: React.FC<ColorPickerProps> = ({ label, variant, description, initialColor }) => {
-    console.log(description)
     const [color, setColor] = React.useState(Boolean(initialColor) ?
         initialColor : "#" + Math.floor(Math.random() * 16777215).toString(16))
     const classes = useStyles(color!)()

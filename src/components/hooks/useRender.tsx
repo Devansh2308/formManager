@@ -9,7 +9,6 @@ export const useRender = () => {
     const formItem = formElementsMap?.find(
       (el) => el.type === item.element
     );
-    console.log("item", item)
     const C = formItem?.component(item?.settings!);
     return (<>
       <ElementWrapper onItemClick={onItemClick} id={item.id}>

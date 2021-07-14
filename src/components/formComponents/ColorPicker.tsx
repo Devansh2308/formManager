@@ -232,7 +232,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
 const ColorPickerComponent: TComponentType = {
     component: (props: any) => {
-        console.log("componentProps", props)
         const colorPickerProps = {
             variant: props?.["variant"] ?? "TWITTER",
             label: props?.["label"] ?? "",

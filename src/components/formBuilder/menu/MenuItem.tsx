@@ -38,11 +38,8 @@ const useStyles = makeStyles(({ palette: { background, divider, common, action, 
                 backgroundColor: `${fade("#3BA68A", 0.04)} !important`,
                 color: "#3BA68A"
             },
-            '& $icon': {
-                color: 'inherit !important',
-            },
+
         },
-        icon: {},
 
 
 
@@ -93,7 +90,7 @@ const MenuItem: React.FC<IMenuItemProps> = (item) => {
             className={classes.listItems}
 
         >
-            <ListItemIcon className={classes.icon}>
+            <ListItemIcon >
                 {ItemIcon}
             </ListItemIcon>
             <ListItemText primary={ItemName} />

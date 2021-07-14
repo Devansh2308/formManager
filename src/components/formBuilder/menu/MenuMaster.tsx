@@ -57,7 +57,6 @@ const FormMenuMaster: React.FC = () => {
                     setList={() => undefined}
                     // className={classes.list}
                     setData={(dataTransfer: DataTransfer, draggedElement: HTMLElement) => {
-                        console.log(draggedElement)
                         const dragImage = document.createElement('img')
                         dragImage.src = draggedElement.dataset.dragImage as string
                         dataTransfer.setDragImage(dragImage, -10, -10)

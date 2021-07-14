@@ -33,7 +33,6 @@ const checkBoxSettingsValidationSchema = yup.object().shape({
         .max(50, (`Max 50 characters allowed` as unknown) as string)
         .required((`Required` as unknown) as string)),
     minOptionToBeSelected: yup.number().test('options', 'option Validation', function (value) {
-        console.log(this.parent, value)
         const options = this.parent.options
         if (this.parent.singleOption) return true
         if (this.parent.minOptionToBeSelected > options.length) {
@@ -144,7 +143,7 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                     {({ values, setValues }) => (
                         <Form className={classes.form} id="settings-form">
                             <Grid container>
-                                <Box mb={1}>Label & Placeholder's settings</Box>
+                                <Box mb={1} ><b>Label & Placeholder's settings</b></Box>
                                 <Grid xs={12} className={classes.field}>
                                     <Field name="label">
                                         {({ field, meta }: FieldProps<string>) => (

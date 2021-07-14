@@ -269,7 +269,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
 const MultiLineInput: TComponentType = {
     component: (props: any) => {
-        console.log("componentProps", props)
         const textFieldProps: TextFieldProps = {
             variant: props?.["variant"] ?? "outlined",
             size: props?.["size"] ?? "small",
