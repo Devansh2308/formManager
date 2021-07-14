@@ -102,21 +102,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                     </Field>
                                 </Grid>
                                 <Grid xs={12} className={classes.field}>
-                                    <Field name="placeholder">
-                                        {({ field, meta }: FieldProps<string>) => (
-                                            <MaterialTextField
-                                                id="placeholder"
-                                                label="Placeholder"
-                                                variant="outlined"
-                                                size="small"
-                                                fullWidth
-                                                error={!!(meta.touched && meta.error)}
-                                                helperText={meta.touched ? meta.error : ''}
-                                                {...field}
-                                            />)}
-                                    </Field>
-                                </Grid>
-                                <Grid xs={12} className={classes.field}>
                                     <Field name="description">
                                         {({ field, meta }: FieldProps<string>) => (
                                             <MaterialTextField
@@ -133,56 +118,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                                 {...field}
                                             />)}
                                     </Field>
-                                </Grid>
-                                <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
-                                <Grid xs={12} className={classes.field}>
-                                    <Field name="initialValue">
-                                        {({ field, meta }: FieldProps<string>) => (
-                                            <MaterialTextField
-                                                id="initialValue"
-                                                label="Initial Value"
-                                                variant="outlined"
-                                                size="small"
-                                                fullWidth
-                                                error={!!(meta.touched && meta.error)}
-                                                helperText={meta.touched ? meta.error : ''}
-                                                {...field}
-                                            />)}
-                                    </Field>
-                                </Grid>
-                                <Grid className={classes.field} container direction={"row"} spacing={1}>
-                                    <Grid xs={6} item >
-                                        <Field name="minCharLimit">
-                                            {({ field, meta }: FieldProps<number>) => (
-                                                <MaterialTextField
-                                                    id="minChar"
-                                                    label="Min Char Limit"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    fullWidth
-                                                    type="number"
-                                                    error={!!(meta.touched && meta.error)}
-                                                    helperText={meta.touched ? meta.error : ''}
-                                                    {...field}
-                                                />)}
-                                        </Field>
-                                    </Grid>
-                                    <Grid xs={6} item >
-                                        <Field name="maxCharLimit">
-                                            {({ field, meta }: FieldProps<number>) => (
-                                                <MaterialTextField
-                                                    id="maxChar"
-                                                    label="Max Char Limit"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    fullWidth
-                                                    type="number"
-                                                    error={!!(meta.touched && meta.error)}
-                                                    helperText={meta.touched ? meta.error : ''}
-                                                    {...field}
-                                                />)}
-                                        </Field>
-                                    </Grid>
                                 </Grid>
                                 <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
                                 <Grid className={classes.field} style={{ marginTop: "0px" }} container direction={"row"} spacing={1}>

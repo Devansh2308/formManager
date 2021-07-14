@@ -116,6 +116,11 @@ const MyApp = ({
                 ].join(','),
                 body1: { fontSize: "0.85rem" }
             },
+            palette: {
+                primary: {
+                    main: "#06B2FC"
+                }
+            }
 
         })
     );
