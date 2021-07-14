@@ -35,8 +35,8 @@ const useStyles = makeStyles(({ palette: { background, divider, common, action, 
             paddingTop: `${spacing(2)}px !important`,
             paddingBottom: `${spacing(2)}px !important`,
             "&:hover": {
-                backgroundColor: `${fade("#3BA68A", 0.04)} !important`,
-                color: "#3BA68A"
+                backgroundColor: `${fade(primary.main, 0.04)} !important`,
+                color: primary.main
             },
 
         },

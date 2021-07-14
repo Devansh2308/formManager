@@ -9,8 +9,8 @@ import { Theme } from "@material-ui/core"
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
 
 
-const textFieldSettingsInitialValues = {
-    label: "",
+const NumberSettingsInitialValues = {
+    label: "Number Input",
     description: "",
     placeholder: "",
     variant: "outlined",
@@ -68,7 +68,7 @@ const useStyles = makeStyles(({ palette: { text },
 const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
     const classes = useStyles()
-    const initialValues = Boolean(props?.settings) ? props?.settings : textFieldSettingsInitialValues
+    const initialValues = Boolean(props?.settings) ? props?.settings : NumberSettingsInitialValues
 
     return (<>
         <div className={classes.root}>
@@ -283,7 +283,8 @@ const NumberInput: TComponentType = {
     type: "NUMBER_INPUT",
     itemName: "Number Input",
     icon: <BorderColorOutlined />,
-    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />
+    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />,
+    initialValue: NumberSettingsInitialValues
 }
 
 export default NumberInput

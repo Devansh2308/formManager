@@ -2,7 +2,7 @@
 import { Divider, Grid, Switch, TextField as MaterialTextField, TextFieldProps } from "@material-ui/core"
 import React from "react"
 import { renderSettingsProps, TComponentType } from "../types"
-import { TextFieldsOutlined} from "@material-ui/icons"
+import { TextFieldsOutlined } from "@material-ui/icons"
 import { Formik, Field, Form, FieldProps } from 'formik';
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core"
@@ -10,7 +10,7 @@ import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
 
 
 const textFieldSettingsInitialValues = {
-    label: "",
+    label: "Single Line Input",
     description: "",
     placeholder: "",
     variant: "outlined",
@@ -281,7 +281,8 @@ const TextField: TComponentType = {
     type: "INPUT",
     itemName: "Single Line Input",
     icon: <TextFieldsOutlined />,
-    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />
+    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />,
+    initialValue: textFieldSettingsInitialValues
 }
 
 export default TextField

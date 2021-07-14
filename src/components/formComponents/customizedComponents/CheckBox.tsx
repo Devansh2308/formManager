@@ -31,7 +31,9 @@ const useStyles = makeStyles(({ palette: { text },
         },
         description: {
             ...subtitle2,
-            fontStyle: "italic"
+            fontSize: "0.75rem",
+            color: text.secondary
+
         }
 
     }))

@@ -10,19 +10,14 @@ import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
 import { DatePicker } from "@material-ui/pickers";
 
 
-const textFieldSettingsInitialValues = {
-    label: "",
+const datePickerSettingsInitialValues = {
+    label: "Date Picker",
     description: "",
-    placeholder: "",
-    variant: "outlined",
-    size: "medium",
-    minCharLimit: 0,
-    maxCharLimit: 255,
     required: false,
     enabled: true
 }
 
-const textFieldSettingsValidationSchema = {}
+
 
 
 const useStyles = makeStyles(({ palette: { text },
@@ -69,7 +64,7 @@ const useStyles = makeStyles(({ palette: { text },
 const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
     const classes = useStyles()
-    const initialValues = Boolean(props?.settings) ? props?.settings : textFieldSettingsInitialValues
+    const initialValues = Boolean(props?.settings) ? props?.settings : datePickerSettingsInitialValues
 
     return (<>
         <div className={classes.root}>
@@ -154,15 +149,13 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
 const DatePickerComponent: TComponentType = {
     component: (props: any) => {
-        const textFieldProps: TextFieldProps = {
-            variant: props?.["variant"] ?? "outlined",
-            size: props?.["size"] ?? "small",
+        const datePickerProps: any = {
             label: props?.["label"] ?? "",
             helperText: props?.["description"] ?? ""
         }
+
         return <DatePicker
-            label="Basic example"
-            value={"12/03/2022"}
+            {...datePickerProps}
             onChange={() => { }}
             animateYearScrolling
         />
@@ -171,7 +164,8 @@ const DatePickerComponent: TComponentType = {
     type: "DATE_PICKER",
     itemName: "Date Picker",
     icon: <DateRangeOutlined />,
-    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />
+    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />,
+    initialValue: datePickerSettingsInitialValues
 }
 
 export default DatePickerComponent

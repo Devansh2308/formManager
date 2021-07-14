@@ -1,5 +1,5 @@
 
-import { Divider, Grid, Switch, TextField as MaterialTextField, TextFieldProps } from "@material-ui/core"
+import { Divider, Grid, InputAdornment, Switch, TextField as MaterialTextField, TextFieldProps } from "@material-ui/core"
 import React from "react"
 import { renderSettingsProps, TComponentType } from "../types"
 import { EmailOutlined } from "@material-ui/icons"
@@ -275,10 +275,19 @@ const Email: TComponentType = {
             label: props?.["label"] ?? "",
             helperText: props?.["description"] ?? ""
         }
-        return < MaterialTextField {...textFieldProps} fullWidth />
+        return < MaterialTextField
+            InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                        <EmailOutlined />
+                    </InputAdornment>
+                ),
+            }}
+
+            {...textFieldProps} fullWidth />
     },
     componentSettings: [],
-    type: "INPUT",
+    type: "EMAIL",
     itemName: "Email Input",
     icon: <EmailOutlined />,
     renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />

@@ -10,19 +10,15 @@ import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
 import { DatePicker, DateTimePicker } from "@material-ui/pickers";
 
 
-const textFieldSettingsInitialValues = {
-    label: "",
+const dateTimePickerSettingsInitialValues = {
+    label: "Date Time Picker",
     description: "",
-    placeholder: "",
-    variant: "outlined",
-    size: "medium",
-    minCharLimit: 0,
-    maxCharLimit: 255,
     required: false,
     enabled: true
 }
 
-const textFieldSettingsValidationSchema = {}
+
+
 
 
 const useStyles = makeStyles(({ palette: { text },
@@ -69,7 +65,7 @@ const useStyles = makeStyles(({ palette: { text },
 const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
     const classes = useStyles()
-    const initialValues = Boolean(props?.settings) ? props?.settings : textFieldSettingsInitialValues
+    const initialValues = Boolean(props?.settings) ? props?.settings : dateTimePickerSettingsInitialValues
 
     return (<>
         <div className={classes.root}>
@@ -102,21 +98,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                     </Field>
                                 </Grid>
                                 <Grid xs={12} className={classes.field}>
-                                    <Field name="placeholder">
-                                        {({ field, meta }: FieldProps<string>) => (
-                                            <MaterialTextField
-                                                id="placeholder"
-                                                label="Placeholder"
-                                                variant="outlined"
-                                                size="small"
-                                                fullWidth
-                                                error={!!(meta.touched && meta.error)}
-                                                helperText={meta.touched ? meta.error : ''}
-                                                {...field}
-                                            />)}
-                                    </Field>
-                                </Grid>
-                                <Grid xs={12} className={classes.field}>
                                     <Field name="description">
                                         {({ field, meta }: FieldProps<string>) => (
                                             <MaterialTextField
@@ -133,107 +114,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                                 {...field}
                                             />)}
                                     </Field>
-                                </Grid>
-                                <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
-                                <Grid xs={12}
-                                    className={classes.field}
-                                    style={{ display: "grid" }}>
-                                    <span className={classes.span}>
-                                        Variant
-                                    </span>
-                                    <ToggleButtonGroup
-                                        value={values.variant}
-                                        exclusive
-                                        onChange={(v, a) => { setValues({ ...values, variant: a }) }}
-                                        aria-label="variant"
-                                        size="small"
-                                        className={classes.buttonGroup}
-                                    >
-                                        <ToggleButton value="outlined" aria-label="left aligned">
-                                            OUTLINED
-                                        </ToggleButton>
-                                        <ToggleButton value="standard" aria-label="centered">
-                                            STANDARD
-                                        </ToggleButton>
-                                        <ToggleButton value="filled" aria-label="right aligned">
-                                            FILLED
-                                        </ToggleButton>
-
-                                    </ToggleButtonGroup>
-                                </Grid>
-                                <Grid xs={12} className={classes.field} style={{ display: "grid" }}>
-                                    <span className={classes.span}>
-                                        Size
-                                    </span>
-                                    <ToggleButtonGroup
-                                        value={values.size}
-                                        exclusive
-                                        onChange={(v, a) => { setValues({ ...values, size: a }) }}
-                                        aria-label="variant"
-                                        size="small"
-                                        className={classes.buttonGroup}
-                                    >
-                                        <ToggleButton value="small" aria-label="left aligned">
-                                            SMALL
-                                        </ToggleButton>
-                                        <ToggleButton value="medium" aria-label="centered">
-                                            MEDIUM
-                                        </ToggleButton>
-                                        <ToggleButton value="large" aria-label="right aligned">
-                                            LARGE
-                                        </ToggleButton>
-
-                                    </ToggleButtonGroup>
-                                </Grid>
-                                <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
-                                <Grid xs={12} className={classes.field}>
-                                    <Field name="initialValue">
-                                        {({ field, meta }: FieldProps<string>) => (
-                                            <MaterialTextField
-                                                id="initialValue"
-                                                label="Initial Value"
-                                                variant="outlined"
-                                                size="small"
-                                                fullWidth
-                                                error={!!(meta.touched && meta.error)}
-                                                helperText={meta.touched ? meta.error : ''}
-                                                {...field}
-                                            />)}
-                                    </Field>
-                                </Grid>
-                                <Grid className={classes.field} container direction={"row"} spacing={1}>
-                                    <Grid xs={6} item >
-                                        <Field name="minCharLimit">
-                                            {({ field, meta }: FieldProps<number>) => (
-                                                <MaterialTextField
-                                                    id="minChar"
-                                                    label="Min Char Limit"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    fullWidth
-                                                    type="number"
-                                                    error={!!(meta.touched && meta.error)}
-                                                    helperText={meta.touched ? meta.error : ''}
-                                                    {...field}
-                                                />)}
-                                        </Field>
-                                    </Grid>
-                                    <Grid xs={6} item >
-                                        <Field name="maxCharLimit">
-                                            {({ field, meta }: FieldProps<number>) => (
-                                                <MaterialTextField
-                                                    id="maxChar"
-                                                    label="Max Char Limit"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    fullWidth
-                                                    type="number"
-                                                    error={!!(meta.touched && meta.error)}
-                                                    helperText={meta.touched ? meta.error : ''}
-                                                    {...field}
-                                                />)}
-                                        </Field>
-                                    </Grid>
                                 </Grid>
                                 <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
                                 <Grid className={classes.field} style={{ marginTop: "0px" }} container direction={"row"} spacing={1}>
@@ -270,15 +150,14 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
 const DateTimePickerComponent: TComponentType = {
     component: (props: any) => {
-        const textFieldProps: TextFieldProps = {
-            variant: props?.["variant"] ?? "outlined",
-            size: props?.["size"] ?? "small",
+        const dateTimePickerProps: any = {
+
             label: props?.["label"] ?? "",
             helperText: props?.["description"] ?? ""
         }
         return <DateTimePicker
-            label="Basic example"
-            value={"12/03/2022"}
+            {...dateTimePickerProps}
+            // value={"12/03/2022"}
             onChange={() => { }}
             animateYearScrolling
         />
@@ -287,7 +166,8 @@ const DateTimePickerComponent: TComponentType = {
     type: "DATE_TIME_PICKER",
     itemName: "Date Time Picker",
     icon: <EventOutlined />,
-    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />
+    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />,
+    initialValue: dateTimePickerSettingsInitialValues
 }
 
 export default DateTimePickerComponent

@@ -81,7 +81,8 @@ export type Element =
   | "TIME_PICKER"
   | "TELEPHONE"
   | "RADIO_BUTTON"
-  | "CHECKBOX";
+  | "CHECKBOX"
+  | "EMAIL";
 
 export type TStateItem = {
   id: string;

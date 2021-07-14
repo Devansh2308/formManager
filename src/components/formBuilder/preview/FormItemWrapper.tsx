@@ -4,7 +4,7 @@ import { Divider, Theme } from "@material-ui/core";
 import { useFormBuilder } from "../../FormBuilderProviders";
 import clsx from "clsx";
 
-const useStyles = makeStyles(({ palette: { background, divider }, spacing }: Theme) => ({
+const useStyles = makeStyles(({ palette: { primary }, spacing }: Theme) => ({
     selected: {
         width: '100%',
 

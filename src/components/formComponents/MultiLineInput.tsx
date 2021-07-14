@@ -9,8 +9,8 @@ import { Theme } from "@material-ui/core"
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
 
 
-const textFieldSettingsInitialValues = {
-    label: "",
+const multiLineSettingsInitialValues = {
+    label: "Description",
     description: "",
     placeholder: "",
     variant: "outlined",
@@ -68,7 +68,7 @@ const useStyles = makeStyles(({ palette: { text },
 const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
     const classes = useStyles()
-    const initialValues = Boolean(props?.settings) ? props?.settings : textFieldSettingsInitialValues
+    const initialValues = Boolean(props?.settings) ? props?.settings : multiLineSettingsInitialValues
 
     return (<>
         <div className={classes.root}>
@@ -277,6 +277,7 @@ const MultiLineInput: TComponentType = {
         }
         return < MaterialTextField {...textFieldProps}
             fullWidth
+            multiline
             rows={4}
             rowsMax={6}
         />
@@ -285,7 +286,8 @@ const MultiLineInput: TComponentType = {
     type: "MULTI_LINE_INPUT",
     itemName: "Multi Line Input",
     icon: <TextFieldsOutlined />,
-    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />
+    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />,
+    initialValue: multiLineSettingsInitialValues
 }
 
 export default MultiLineInput

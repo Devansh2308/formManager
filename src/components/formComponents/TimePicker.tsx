@@ -10,19 +10,14 @@ import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
 import { DatePicker, DateTimePicker, TimePicker } from "@material-ui/pickers";
 
 
-const textFieldSettingsInitialValues = {
-    label: "",
+
+const timePickerSettingsInitialValues = {
+    label: "Date Picker",
     description: "",
-    placeholder: "",
-    variant: "outlined",
-    size: "medium",
-    minCharLimit: 0,
-    maxCharLimit: 255,
     required: false,
     enabled: true
 }
 
-const textFieldSettingsValidationSchema = {}
 
 
 const useStyles = makeStyles(({ palette: { text },
@@ -69,7 +64,7 @@ const useStyles = makeStyles(({ palette: { text },
 const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
     const classes = useStyles()
-    const initialValues = Boolean(props?.settings) ? props?.settings : textFieldSettingsInitialValues
+    const initialValues = Boolean(props?.settings) ? props?.settings : timePickerSettingsInitialValues
 
     return (<>
         <div className={classes.root}>
@@ -268,19 +263,16 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 }
 
 
-const DateTimePickerComponent: TComponentType = {
+const TimePickerComponent: TComponentType = {
     component: (props: any) => {
-        const textFieldProps: TextFieldProps = {
-            variant: props?.["variant"] ?? "outlined",
-            size: props?.["size"] ?? "small",
+        const timePickerProps: any = {
             label: props?.["label"] ?? "",
             helperText: props?.["description"] ?? ""
         }
         return <TimePicker
             clearable
             ampm={false}
-            label="24 hours"
-            value={() => { }}
+            {...timePickerProps}
             onChange={() => { }}
         />
     },
@@ -288,7 +280,8 @@ const DateTimePickerComponent: TComponentType = {
     type: "TIME_PICKER",
     itemName: "Time Picker",
     icon: <AccessAlarmsOutlined />,
-    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />
+    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />,
+    initialValue: timePickerSettingsInitialValues
 }
 
-export default DateTimePickerComponent
+export default TimePickerComponent

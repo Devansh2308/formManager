@@ -28,7 +28,7 @@ interface ColorPickerProps {
     initialColor?: string
 }
 const useStyles = (color: string) => {
-    return makeStyles(({ palette: { background, divider, common },
+    return makeStyles(({ palette: { text },
         spacing, typography: { subtitle2 }, shape, breakpoints }: Theme) => ({
             button: {
                 height: spacing(3),
@@ -46,7 +46,9 @@ const useStyles = (color: string) => {
             },
             description: {
                 ...subtitle2,
-                fontStyle: "italic"
+                fontSize: "0.75rem",
+                color: text.secondary
+
             }
 
         }))

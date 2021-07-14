@@ -178,7 +178,7 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                     </Field>
                                 </Grid>
                                 {values.options && <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>}
-                                <Box >Options</Box>
+                                <Box ><b>Options</b></Box>
                                 <Grid xs={12} className={classes.field} style={{ marginTop: "0px" }}>
                                     <FieldArray
                                         name="options"
@@ -229,7 +229,7 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                 <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
                                 <Grid xs={12} className={classes.field}>
                                     <Box mb={0.5}>
-                                        <Typography>Check-box settings</Typography>
+                                        <Typography><b>Check-box settings</b></Typography>
                                     </Box>
                                     <Box>
                                         <Box display="flex">
@@ -283,7 +283,7 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                     </Grid>
                                 </Collapse>
                                 <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
-                                <Box >Validations</Box>
+                                <Box ><b>Validations</b></Box>
                                 <Grid className={classes.field} style={{ marginTop: "0px" }} container direction={"row"} spacing={1}>
                                     <Grid xs={5} style={{ paddingTop: "12px" }} >
                                         REQUIRED

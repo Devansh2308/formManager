@@ -1,9 +1,9 @@
 
-import { Divider, Grid, Switch, TextField as MaterialTextField, TextFieldProps } from "@material-ui/core"
+import { Box, Divider, Grid, IconButton, Switch, TextField as MaterialTextField, TextFieldProps, Tooltip } from "@material-ui/core"
 import React from "react"
 import { renderSettingsProps, TComponentType } from "../types"
-import { RadioButtonCheckedOutlined } from "@material-ui/icons"
-import { Formik, Field, Form, FieldProps } from 'formik';
+import { AddOutlined, RadioButtonCheckedOutlined, RemoveCircleOutline } from "@material-ui/icons"
+import { Formik, Field, Form, FieldProps, FieldArray } from 'formik';
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core"
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
@@ -11,14 +11,13 @@ import CheckBoxInput from "./customizedComponents/CheckBox";
 import RadioButtonInput from "./customizedComponents/RadioButton";
 
 
-const textFieldSettingsInitialValues = {
-    label: "",
+const radioButtonSettingsInitialValues = {
+    label: "Radio Button",
     description: "",
-    placeholder: "",
-    variant: "outlined",
-    size: "medium",
-    minCharLimit: 0,
-    maxCharLimit: 255,
+    options: ["Option 1"],
+    singleOption: true,
+    minOptionToBeSelected: 1,
+    maxOptionToBeSelected: 1,
     required: false,
     enabled: true
 }
@@ -63,6 +62,13 @@ const useStyles = makeStyles(({ palette: { text },
             "& .MuiToggleButtonGroup-groupedHorizontal": {
                 width: "50% !important"
             }
+        },
+        options: {
+            padding: "8px !important"
+        },
+        optionContainer: {
+            display: "flex",
+            marginTop: spacing(2)
         }
 
     }))
@@ -70,7 +76,7 @@ const useStyles = makeStyles(({ palette: { text },
 const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
     const classes = useStyles()
-    const initialValues = Boolean(props?.settings) ? props?.settings : textFieldSettingsInitialValues
+    const initialValues = Boolean(props?.settings) ? props?.settings : radioButtonSettingsInitialValues
 
     return (<>
         <div className={classes.root}>
@@ -103,21 +109,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                     </Field>
                                 </Grid>
                                 <Grid xs={12} className={classes.field}>
-                                    <Field name="placeholder">
-                                        {({ field, meta }: FieldProps<string>) => (
-                                            <MaterialTextField
-                                                id="placeholder"
-                                                label="Placeholder"
-                                                variant="outlined"
-                                                size="small"
-                                                fullWidth
-                                                error={!!(meta.touched && meta.error)}
-                                                helperText={meta.touched ? meta.error : ''}
-                                                {...field}
-                                            />)}
-                                    </Field>
-                                </Grid>
-                                <Grid xs={12} className={classes.field}>
                                     <Field name="description">
                                         {({ field, meta }: FieldProps<string>) => (
                                             <MaterialTextField
@@ -135,107 +126,57 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                             />)}
                                     </Field>
                                 </Grid>
-                                <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
-                                <Grid xs={12}
-                                    className={classes.field}
-                                    style={{ display: "grid" }}>
-                                    <span className={classes.span}>
-                                        Variant
-                                    </span>
-                                    <ToggleButtonGroup
-                                        value={values.variant}
-                                        exclusive
-                                        onChange={(v, a) => { setValues({ ...values, variant: a }) }}
-                                        aria-label="variant"
-                                        size="small"
-                                        className={classes.buttonGroup}
-                                    >
-                                        <ToggleButton value="outlined" aria-label="left aligned">
-                                            OUTLINED
-                                        </ToggleButton>
-                                        <ToggleButton value="standard" aria-label="centered">
-                                            STANDARD
-                                        </ToggleButton>
-                                        <ToggleButton value="filled" aria-label="right aligned">
-                                            FILLED
-                                        </ToggleButton>
+                                {values.options && <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>}
+                                <Box ><b>Options</b></Box>
+                                <Grid xs={12} className={classes.field} style={{ marginTop: "0px" }}>
+                                    <FieldArray
+                                        name="options"
+                                        render={arrayHelpers => (
+                                            <div >
+                                                {values.options && (
+                                                    values.options.map((option: string, index: number) => (
+                                                        <div key={index} className={classes.optionContainer}>
+                                                            <Field name={`options.${index}`}>
+                                                                {({ field, meta }: FieldProps<string>) => (
+                                                                    <MaterialTextField
+                                                                        id={`option.${index + 1}`}
+                                                                        label={`Option ${index + 1}`}
+                                                                        variant="outlined"
+                                                                        size="small"
 
-                                    </ToggleButtonGroup>
+                                                                        error={!!(meta.touched && meta.error)}
+                                                                        helperText={meta.touched ? meta.error : ''}
+                                                                        {...field}
+                                                                    />)}
+                                                            </Field>
+                                                            <Box>
+                                                                {values.options.length > 1 && <Tooltip title="Remove Option">
+                                                                    <IconButton
+                                                                        onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                                                        className={classes.options}
+                                                                    >
+                                                                        <RemoveCircleOutline />
+                                                                    </IconButton>
+                                                                </Tooltip>}
+                                                                {index === 0 && <Tooltip title="Add Option">
+                                                                    <IconButton
+                                                                        type="button"
+                                                                        onClick={() => arrayHelpers.insert(index, ``)} // insert an empty string at a position
+                                                                        className={classes.options}
+                                                                    >
+                                                                        <AddOutlined />
+                                                                    </IconButton>
+                                                                </Tooltip>}
+                                                            </Box>
+                                                        </div>
+                                                    ))
+                                                )}
+                                            </div>
+                                        )}
+                                    />
                                 </Grid>
-                                <Grid xs={12} className={classes.field} style={{ display: "grid" }}>
-                                    <span className={classes.span}>
-                                        Size
-                                    </span>
-                                    <ToggleButtonGroup
-                                        value={values.size}
-                                        exclusive
-                                        onChange={(v, a) => { setValues({ ...values, size: a }) }}
-                                        aria-label="variant"
-                                        size="small"
-                                        className={classes.buttonGroup}
-                                    >
-                                        <ToggleButton value="small" aria-label="left aligned">
-                                            SMALL
-                                        </ToggleButton>
-                                        <ToggleButton value="medium" aria-label="centered">
-                                            MEDIUM
-                                        </ToggleButton>
-                                        <ToggleButton value="large" aria-label="right aligned">
-                                            LARGE
-                                        </ToggleButton>
 
-                                    </ToggleButtonGroup>
-                                </Grid>
-                                <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
-                                <Grid xs={12} className={classes.field}>
-                                    <Field name="initialValue">
-                                        {({ field, meta }: FieldProps<string>) => (
-                                            <MaterialTextField
-                                                id="initialValue"
-                                                label="Initial Value"
-                                                variant="outlined"
-                                                size="small"
-                                                fullWidth
-                                                error={!!(meta.touched && meta.error)}
-                                                helperText={meta.touched ? meta.error : ''}
-                                                {...field}
-                                            />)}
-                                    </Field>
-                                </Grid>
-                                <Grid className={classes.field} container direction={"row"} spacing={1}>
-                                    <Grid xs={6} item >
-                                        <Field name="minCharLimit">
-                                            {({ field, meta }: FieldProps<number>) => (
-                                                <MaterialTextField
-                                                    id="minChar"
-                                                    label="Min Char Limit"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    fullWidth
-                                                    type="number"
-                                                    error={!!(meta.touched && meta.error)}
-                                                    helperText={meta.touched ? meta.error : ''}
-                                                    {...field}
-                                                />)}
-                                        </Field>
-                                    </Grid>
-                                    <Grid xs={6} item >
-                                        <Field name="maxCharLimit">
-                                            {({ field, meta }: FieldProps<number>) => (
-                                                <MaterialTextField
-                                                    id="maxChar"
-                                                    label="Max Char Limit"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    fullWidth
-                                                    type="number"
-                                                    error={!!(meta.touched && meta.error)}
-                                                    helperText={meta.touched ? meta.error : ''}
-                                                    {...field}
-                                                />)}
-                                        </Field>
-                                    </Grid>
-                                </Grid>
+
                                 <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
                                 <Grid className={classes.field} style={{ marginTop: "0px" }} container direction={"row"} spacing={1}>
                                     <Grid xs={5} style={{ paddingTop: "12px" }} >
@@ -271,15 +212,14 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
 
 const RadioButtonComponent: TComponentType = {
     component: (props: any) => {
-        const textFieldProps: TextFieldProps = {
-            variant: props?.["variant"] ?? "outlined",
-            size: props?.["size"] ?? "small",
-            label: props?.["label"] ?? "",
-            helperText: props?.["description"] ?? ""
+        const radioButtonProps = {
+            options: props?.["options"] ?? ["option 1"],
+            label: props?.["label"] ?? "Check Box",
+            description: props?.["description"] ?? "",
+            builderMode: props?.["builderMode"] ?? true
         }
         return <RadioButtonInput
-            label={"Radio-Button"}
-            options={["option1", "option2"]}
+            {...radioButtonProps}
             multiple
         />
     },
@@ -287,7 +227,8 @@ const RadioButtonComponent: TComponentType = {
     type: "RADIO_BUTTON",
     itemName: "Radio-Button",
     icon: <RadioButtonCheckedOutlined />,
-    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />
+    renderSettings: (props: renderSettingsProps) => <RenderSettings {...props} />,
+    initialValue: radioButtonSettingsInitialValues
 }
 
 export default RadioButtonComponent

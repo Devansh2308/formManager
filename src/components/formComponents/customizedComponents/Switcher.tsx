@@ -15,9 +15,7 @@ const useStyles = makeStyles(({ palette: { background, divider, common },
         root: {
             display: 'flex',
         },
-        formControl: {
-            margin: spacing(3),
-        },
+
 
     }))
 
@@ -33,7 +31,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({ label, instructions }) => {
     const classes = useStyles()
 
     return <>
-        <FormControl component="fieldset" className={classes.formControl}>
+        <FormControl component="fieldset" >
 
             <FormGroup>
                 <FormControlLabel
