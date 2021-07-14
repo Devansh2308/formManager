@@ -12,7 +12,6 @@ const FormMakerMaster: React.FC = () => {
     const [st, setSt] = useStore("form-state", {})
 
     React.useEffect(() => {
-        console.log(state)
         setSt(state as any)
     }, [state])
 

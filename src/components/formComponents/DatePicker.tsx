@@ -1,5 +1,5 @@
 
-import { Divider, Grid, Switch, TextField as MaterialTextField, TextFieldProps } from "@material-ui/core"
+import { Box, Divider, Grid, MenuItem, Select, Switch, TextField as MaterialTextField, TextFieldProps } from "@material-ui/core"
 import React from "react"
 import { renderSettingsProps, TComponentType } from "../types"
 import { DateRangeOutlined } from "@material-ui/icons"
@@ -133,57 +133,6 @@ const RenderSettings: React.FC<renderSettingsProps> = (props) => {
                                                 {...field}
                                             />)}
                                     </Field>
-                                </Grid>
-                                <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
-                                <Grid xs={12}
-                                    className={classes.field}
-                                    style={{ display: "grid" }}>
-                                    <span className={classes.span}>
-                                        Variant
-                                    </span>
-                                    <ToggleButtonGroup
-                                        value={values.variant}
-                                        exclusive
-                                        onChange={(v, a) => { setValues({ ...values, variant: a }) }}
-                                        aria-label="variant"
-                                        size="small"
-                                        className={classes.buttonGroup}
-                                    >
-                                        <ToggleButton value="outlined" aria-label="left aligned">
-                                            OUTLINED
-                                        </ToggleButton>
-                                        <ToggleButton value="standard" aria-label="centered">
-                                            STANDARD
-                                        </ToggleButton>
-                                        <ToggleButton value="filled" aria-label="right aligned">
-                                            FILLED
-                                        </ToggleButton>
-
-                                    </ToggleButtonGroup>
-                                </Grid>
-                                <Grid xs={12} className={classes.field} style={{ display: "grid" }}>
-                                    <span className={classes.span}>
-                                        Size
-                                    </span>
-                                    <ToggleButtonGroup
-                                        value={values.size}
-                                        exclusive
-                                        onChange={(v, a) => { setValues({ ...values, size: a }) }}
-                                        aria-label="variant"
-                                        size="small"
-                                        className={classes.buttonGroup}
-                                    >
-                                        <ToggleButton value="small" aria-label="left aligned">
-                                            SMALL
-                                        </ToggleButton>
-                                        <ToggleButton value="medium" aria-label="centered">
-                                            MEDIUM
-                                        </ToggleButton>
-                                        <ToggleButton value="large" aria-label="right aligned">
-                                            LARGE
-                                        </ToggleButton>
-
-                                    </ToggleButtonGroup>
                                 </Grid>
                                 <Grid xs={12} className={classes.divider} ><Divider></Divider></Grid>
                                 <Grid xs={12} className={classes.field}>

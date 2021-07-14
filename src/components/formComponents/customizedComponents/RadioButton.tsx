@@ -47,8 +47,8 @@ const RadioButtonInput: React.FC<RadioButtonInputProps> = ({ options, label, mul
             <FormLabel className={classes.formLabel}>{label}</FormLabel>
             <FormGroup className={classes.formGroup}>
                 <Box pl={1} display="grid">
-                    {options.map((option) => {
-                        return (<FormControlLabel
+                    {options.map((option, index) => {
+                        return (<FormControlLabel key={index}
                             control={<Radio checked={false} onChange={() => { }} name={option} className={classes.checkBox} />}
                             label={option}
                         />)

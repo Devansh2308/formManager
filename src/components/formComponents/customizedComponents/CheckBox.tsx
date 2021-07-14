@@ -77,8 +77,9 @@ const CheckBoxInput: React.FC<CheckBoxInputProps> = ({ options, label, multiple,
                 <FormLabel className={classes.formLabel}>{label}</FormLabel>
                 <FormGroup className={classes.formGroup}>
                     <Box pl={1} display="grid">
-                        {options.map((option) => {
+                        {options.map((option, index) => {
                             return (<FormControlLabel
+                                key={index}
                                 //@ts-ignore
                                 control={<Checkbox checked={formikProps?.values?.[label]?.includes(option)} onChange={() => { handleChange(option) }}
                                     name={option} className={classes.checkBox} />}
