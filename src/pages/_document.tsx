@@ -40,7 +40,7 @@ class MyDocument extends Document {
             <Html>
                 <Head>
 
-                    <title>Chimera-X 2021</title>
+                    <title>Form Builder</title>
                     <link rel="icon" href=
                         "/logo.png"
                         type="image/x-icon" />
