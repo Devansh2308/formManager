@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormPreview from "./preview/PreviewMaster";
 import { Fab, Grid } from "@material-ui/core";
 import { VisibilityOutlined } from "@material-ui/icons"
+import { useStore } from "../hooks/useStore";
+import { useFormBuilder } from "../FormBuilderProviders";
 
 
 const useStyles = makeStyles({
@@ -16,6 +18,7 @@ const useStyles = makeStyles({
 });
 const FormBuilderMaster: React.FC = () => {
     const classes = useStyles()
+
 
     return <>
         {/* <div className={classes.editor}> */}

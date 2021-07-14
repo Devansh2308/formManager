@@ -321,9 +321,11 @@ const CheckBoxComponent: TComponentType = {
         const checkBoxProps = {
             options: props?.["options"] ?? ["option 1"],
             label: props?.["label"] ?? "Check Box",
-            description: props?.["description"] ?? ""
+            description: props?.["description"] ?? "",
+            builderMode: props?.["builderMode"] ?? true
         }
         return <CheckBoxInput
+
             {...checkBoxProps}
         />
     },

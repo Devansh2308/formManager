@@ -9,6 +9,8 @@ import {
     Typography
 } from "@material-ui/core"
 import { makeStyles, Theme } from "@material-ui/core/styles"
+import { useFormikContext } from "formik"
+import { get } from "lodash"
 import React from "react"
 
 const useStyles = makeStyles(({ palette: { text },
@@ -39,31 +41,57 @@ const useStyles = makeStyles(({ palette: { text },
 
 interface CheckBoxInputProps {
     options: string[],
-    label: String,
+    label: string,
     multiple?: boolean,
-    description?: string
+    description?: string,
+    builderMode: boolean
 }
 
-const CheckBoxInput: React.FC<CheckBoxInputProps> = ({ options, label, multiple, description }) => {
+const CheckBoxInput: React.FC<CheckBoxInputProps> = ({ options, label, multiple, description, builderMode }) => {
+
+
     const classes = useStyles()
 
+    const formikProps = useFormikContext<any>()
+    console.log(formikProps)
+    const handleChange = (option: string) => {
+        if (!builderMode) {
+            if (formikProps?.values?.[label]?.includes(option)) {
+                let options = formikProps?.values?.[label].filter((v: any) => v != option)
+                formikProps?.setValues({ ...formikProps?.values, [label]: options })
+
+            } else {
+
+                let options = formikProps?.values[label]
+                options?.push(option)
+                formikProps?.setValues({ ...formikProps?.values, [label]: Boolean(options) ? options : [option] })
+            }
+
+        }
+    }
+
+
     return <>
-        <FormControl component="fieldset" >
-            <FormLabel className={classes.formLabel}>{label}</FormLabel>
-            <FormGroup className={classes.formGroup}>
-                <Box pl={1} display="grid">
-                    {options.map((option) => {
-                        return (<FormControlLabel
-                            control={<Checkbox checked={false} onChange={() => { }} name={option} className={classes.checkBox} />}
-                            label={option}
-                        />)
-                    })}
-                </Box>
-            </FormGroup>
-            {description && <FormHelperText>
-                <Typography className={classes.description} variant="subtitle2">{description}</Typography>
-            </FormHelperText>}
-        </FormControl>
+        <form>
+            <FormControl component="fieldset" >
+                <FormLabel className={classes.formLabel}>{label}</FormLabel>
+                <FormGroup className={classes.formGroup}>
+                    <Box pl={1} display="grid">
+                        {options.map((option) => {
+                            return (<FormControlLabel
+                                //@ts-ignore
+                                control={<Checkbox checked={formikProps?.values?.[label]?.includes(option)} onChange={() => { handleChange(option) }}
+                                    name={option} className={classes.checkBox} />}
+                                label={option}
+                            />)
+                        })}
+                    </Box>
+                </FormGroup>
+                {description && <FormHelperText>
+                    <Typography className={classes.description} variant="subtitle2">{description}</Typography>
+                </FormHelperText>}
+            </FormControl>
+        </form>
     </>
 }
 

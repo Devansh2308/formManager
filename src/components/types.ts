@@ -101,3 +101,7 @@ export interface FormBuilderContextProps {
     React.SetStateAction<FormBuilderState>
   >;
 }
+
+export interface FormRenderContextProps {
+  renderState: FormBuilderState | null;
+}
